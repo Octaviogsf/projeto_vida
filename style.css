@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Jomhuria&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Jomhuria", serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: #ffffff;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.left-panel {
+    background-color: #17243a;
+    color: white;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.left-panel h1 {
+    font-size: 200px;
+    margin-bottom: 50px;
+    font-weight: lighter;
+}
+
+.left-panel img {
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.left-panel p {
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.right-panel {
+    width: 60%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+}
+
+label {
+    display: block;
+    font-size: 50px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    font-size: 30px;
+    margin-bottom: 20px;
+    border: 2px solid #000000;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    background-color: #17243a;
+    color: white;
+    font-size: 50px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0e1624;
+}
+
+a {
+    text-align: center;
+    display: block;
+    color: white;
+    font-size: 44px;
+    text-decoration: none;
+}
+
+em {
+    color: red;
+    margin-top: 10px;
+    display: block;
+    text-align: center;
+}
+
+.success-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    gap: 20px;
+}
+
+.success-message h1 {
+    font-size: 50px;
+    font-weight: normal;
+}
+
+.success-message p {
+    font-size: 40px;
+    font-weight: normal;
+}
+
+.login-button {
+    background-color: #182235;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #32415a;
+}

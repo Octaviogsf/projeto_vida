@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
+    <script src="/js/validation.js" defer></script>
+</head>
+
+
+
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro - Projeto de Vida</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fonte Jomhuria -->
+    <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
+    
+    <!-- Seu CSS externo -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Validação -->
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
+    <script src="/js/validation.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Painel esquerdo -->
+        <div class="left-panel">
+            <h1>Cadastrar</h1>
+            <img src="IMG/Design sem nome (2).png" alt="Logo Projeto de Vida">
+        </div>
+
+        <!-- Painel direito -->
+        <div class="right-panel">
+            <form action="process-signup.php" method="post" id="signup" novalidate>
+                <div>
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div>
+                    <label for="birthdate">Data de Nascimento:</label>
+                    <input type="date" id="birthdate" name="birthdate" required>
+                </div>
+
+                <div>
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <div>
+                    <label for="password_confirmation">Confirmar Senha:</label>
+                    <input type="password" id="password_confirmation" name="password_confirmation" required>
+                </div>
+
+                <button type="submit">Criar Conta</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
