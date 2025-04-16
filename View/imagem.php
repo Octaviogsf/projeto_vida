@@ -7,7 +7,7 @@ if (!isset($_GET['id'])) {
 
 $user_id = intval($_GET['id']);
 
-$sql = "SELECT foto, foto_tipo FROM user WHERE id = :id AND foto IS NOT NULL";
+$sql = "SELECT foto, foto_tipo FROM fotos WHERE user_id = :id";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
 $stmt->execute();

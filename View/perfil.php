@@ -117,7 +117,8 @@ if (!$user) {
                 success: function (retorno) {
                     if (retorno.sucesso) {
                         $('#mensagem').attr('class', 'alert alert-success').html(retorno.mensagem);
-                        $('#fotoPerfil').attr('src', 'imagem.php?nocache=' + new Date().getTime()); // Força o recarregamento da imagem
+                        // Atualiza a imagem após o upload
+                        $('#fotoPerfil').attr('src', 'imagem.php?id=' + <?= $user_id ?> + '&nocache=' + new Date().getTime());
                     } else {
                         $('#mensagem').attr('class', 'alert alert-danger').html(retorno.mensagem);
                     }
@@ -135,7 +136,7 @@ if (!$user) {
     <div class="perfil-foto">
         <form id="formulario" action="../ajax/salvar.php" method="post" enctype="multipart/form-data">
             <!-- Foto de perfil -->
-            <img id="fotoPerfil" src="imagem.php?user_id=<?= $user_id ?>" alt="Foto de Perfil">
+            <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil">
             <br><br>
             <label for="foto">Inserir Foto</label>
             <input type="file" name="foto" class="form-control" />
@@ -168,4 +169,3 @@ if (!$user) {
 
 </body>
 </html>
-
