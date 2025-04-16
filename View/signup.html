@@ -1,46 +1,35 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-    <title>Signup</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
-    <script src="/js/validation.js" defer></script>
-</head>
-
-
-
-</html>
-<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <title>Cadastro - Projeto de Vida</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="../style.css">
     <!-- Fonte Jomhuria -->
     <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
-    
-    <!-- Seu CSS externo -->
-    <link rel="stylesheet" href="style.css">
+
 
     <!-- Validação -->
     <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
     <script src="/js/validation.js" defer></script>
 </head>
+
 <body>
     <div class="container">
         <!-- Painel esquerdo -->
         <div class="left-panel">
             <h1>Cadastrar</h1>
-            <img src="IMG/Design sem nome (2).png" alt="Logo Projeto de Vida">
+            <img src="../IMG/Design sem nome (2).png" alt="Logo Projeto de Vida">
         </div>
 
         <!-- Painel direito -->
         <div class="right-panel">
-            <form action="process-signup.php" method="post" id="signup" novalidate>
+            <form action="../Controller/process-signup.php" method="post" id="signup">
+
+                <!-- Mensagem de erro será exibida aqui -->
+                <div id="form-error" style="color: red; margin-bottom: 10px;"></div>
+
                 <div>
                     <label for="name">Nome:</label>
                     <input type="text" id="name" name="name" required>
@@ -70,6 +59,30 @@
             </form>
         </div>
     </div>
+    <script>
+        document.getElementById("signup").addEventListener("submit", function (e) {
+            e.preventDefault(); // Impede o envio imediato do formulário
+
+            const form = e.target;
+            const email = form.email.value;
+
+            fetch(`../Controller/check_email.php?email=${encodeURIComponent(email)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        document.getElementById("form-error").textContent = data.message;
+                    } else {
+                        form.submit(); // Agora sim envia o formulário se o email for válido
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro ao verificar e-mail:", error);
+                    document.getElementById("form-error").textContent = "Erro ao verificar e-mail. Tente novamente.";
+                });
+        });
+    </script>
+
 </body>
+
 
 </html>

@@ -31,7 +31,8 @@ if (empty($_POST["birthdate"])) {
 // Armazena a senha com segurança
 $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-$mysqli = require __DIR__ . "/Config.php";
+$mysqli = require __DIR__ . '/../Config.php';
+
 
 // Agora com o campo birthdate
 $sql = "INSERT INTO user (name, email, birthdate, password_hash)
@@ -52,7 +53,7 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-    header("Location: signup-success.html");
+    header("Location: ../View/signup-success.html");
     exit;
 } else {
     if ($mysqli->errno === 1062) {

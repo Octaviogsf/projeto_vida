@@ -4,8 +4,8 @@ $is_invalid = false;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
-    $mysqli = require __DIR__ . "/Config.php";
-    
+    $mysqli = require __DIR__ . '/../Config.php';
+
     $sql = sprintf("SELECT * FROM user
                     WHERE email = '%s'",
                    $mysqli->real_escape_string($_POST["email"]));
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             session_regenerate_id();
             $_SESSION["user_id"] = $user["id"];
             
-            header("Location: index.php");
+            header("Location: perfil.php");
             exit;
         }
     }
@@ -37,14 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
 <div class="container">
     <div class="left-panel">
         <h1>Login</h1>
-        <img src="IMG/Design sem nome (2).png" alt="Projeto de Vida">
+        <img src="../IMG/Design sem nome (2).png" alt="Projeto de Vida">
     </div>
 
     <div class="right-panel">
