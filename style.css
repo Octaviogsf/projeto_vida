@@ -8,10 +8,86 @@
 }
 
 body {
-    display: flex;
-    height: 100vh;
     background-color: #ffffff;
+    min-height: 100vh;
 }
+
+/* Header */
+
+.header {
+    background-color: #19243a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+}
+
+.header .logo {
+    width: 120px;
+    border-radius: 50%;
+    background-color: white;
+    overflow: hidden;
+}
+
+.header .user-name {
+    font-size: 64px;
+}
+
+.header .profile-icon {
+    background-color: #ccc;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+}
+
+.header .logout {
+    margin-left: 20px;
+    font-size: 24px;
+    color: white;
+}
+
+/* Motivational Phrase */
+
+.motivacional {
+    background-color: #19243a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 28px;
+}
+
+/* Metas */
+
+.metas-section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.metas-section h3 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    color: #000;
+}
+
+.metas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 0 40px;
+}
+
+.meta-card {
+    background-color: #19243a;
+    height: 120px;
+    border-radius: 8px;
+}
+
+/* Estilos que você já tinha */
 
 .container {
     display: flex;

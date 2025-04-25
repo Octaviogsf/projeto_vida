@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-$user_id = $_SESSION['user_id']; // ID do usuário logado
+$user_id = $_SESSION['user_id'];
 
 // Buscar os dados do usuário no banco de dados
 $sql = "SELECT * FROM user WHERE id = :user_id";
@@ -17,7 +17,6 @@ $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
 $user = $stmt->fetch();
 
-// Verificar se o usuário foi encontrado
 if (!$user) {
     echo "Usuário não encontrado.";
     exit();
@@ -32,7 +31,6 @@ if (!$user) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://malsup.github.io/jquery.form.min.js"></script>
-
     <style>
         body {
             background-color: #f4f4f4;
@@ -44,7 +42,7 @@ if (!$user) {
             margin: 40px auto;
             background-color: #fff;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .perfil-foto {
@@ -117,7 +115,6 @@ if (!$user) {
                 success: function (retorno) {
                     if (retorno.sucesso) {
                         $('#mensagem').attr('class', 'alert alert-success').html(retorno.mensagem);
-                        // Atualiza a imagem após o upload
                         $('#fotoPerfil').attr('src', 'imagem.php?id=' + <?= $user_id ?> + '&nocache=' + new Date().getTime());
                     } else {
                         $('#mensagem').attr('class', 'alert alert-danger').html(retorno.mensagem);
@@ -130,12 +127,12 @@ if (!$user) {
         });
     </script>
 </head>
+
 <body>
 
 <div class="perfil-container">
     <div class="perfil-foto">
         <form id="formulario" action="../ajax/salvar.php" method="post" enctype="multipart/form-data">
-            <!-- Foto de perfil -->
             <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil">
             <br><br>
             <label for="foto">Inserir Foto</label>
@@ -148,19 +145,19 @@ if (!$user) {
     <div class="perfil-formulario">
         <form action="salvar_perfil.php" method="POST">
             <label>Nome: <span class="glyphicon glyphicon-edit icone-editar"></span></label>
-            <input type="text" name="nome" value="<?= htmlspecialchars($user['name']) ?>">
+            <input type="text" name="nome" value="<?= htmlspecialchars($user['name'] ?? '') ?>">
 
             <label>Email: <span class="glyphicon glyphicon-edit icone-editar"></span></label>
-            <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>">
+            <input type="email" name="email" value="<?= htmlspecialchars($user['email'] ?? '') ?>">
 
             <label>Data de Nascimento: <span class="glyphicon glyphicon-edit icone-editar"></span></label>
-            <input type="date" name="data_nascimento" value="<?= htmlspecialchars($user['birthdate']) ?>">
+            <input type="date" name="data_nascimento" value="<?= htmlspecialchars($user['birthdate'] ?? '') ?>">
 
             <label>Senha: <span class="glyphicon glyphicon-edit icone-editar"></span></label>
             <input type="password" name="senha">
 
             <label style="margin-top:20px;">Sobre mim:</label>
-            <textarea name="sobre_mim" placeholder="Escreva algo sobre você..."><?= htmlspecialchars($user['sobre_mim']) ?></textarea>
+            <textarea name="sobre_mim" placeholder="Escreva algo sobre você..."><?= htmlspecialchars($user['sobre_mim'] ?? '') ?></textarea>
 
             <button class="btn btn-primary btn-sm" style="margin-top:10px;" type="submit">Salvar Alterações</button>
         </form>
