@@ -28,86 +28,9 @@ if (!$user) {
 <head>
     <meta charset="UTF-8">
     <title>Perfil do Usuário</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://malsup.github.io/jquery.form.min.js"></script>
-    <style>
-        body {
-            background-color: #f4f4f4;
-        }
-
-        .perfil-container {
-            display: flex;
-            max-width: 960px;
-            margin: 40px auto;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .perfil-foto {
-            width: 250px;
-            background-color: #162136;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-        }
-
-        .perfil-foto img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            background-color: white;
-        }
-
-        .perfil-formulario {
-            flex: 1;
-            background-color: #162136;
-            color: white;
-            padding: 30px;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
-
-        .perfil-formulario label {
-            font-weight: bold;
-            margin-top: 15px;
-            display: block;
-        }
-
-        .perfil-formulario input[type="text"],
-        .perfil-formulario input[type="email"],
-        .perfil-formulario input[type="date"],
-        .perfil-formulario input[type="password"],
-        .perfil-formulario textarea {
-            width: 100%;
-            background: white;
-            color: black;
-            border: none;
-            padding: 8px;
-            border-radius: 5px;
-            margin-top: 5px;
-        }
-
-        .perfil-formulario textarea {
-            height: 150px;
-            resize: none;
-        }
-
-        .icone-editar {
-            float: right;
-            cursor: pointer;
-            color: white;
-        }
-
-        .alert {
-            margin-top: 10px;
-        }
-    </style>
-
     <script>
         $(function () {
             $('#formulario').ajaxForm({

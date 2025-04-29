@@ -29,6 +29,31 @@ if (!$user) {
     <title>Bem-vindo</title>
     <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/d650d7db78.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Carrossel */
+        .carousel-container {
+            position: relative;
+            width: 600px;               /* Tamanho fixo do carrossel */
+            height: 400px;              /* Defina a altura do carrossel */
+            overflow: hidden;           /* Esconde as imagens que estão fora da área visível */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;             /* Centraliza o carrossel na página */
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease; /* Transição suave entre as imagens */
+        }
+
+        .carousel img {
+            width: 100%;         /* Cada imagem ocupará 100% da largura do carrossel */
+            height: 100%;        /* Cada imagem ocupará 100% da altura do carrossel */
+            object-fit: cover;   /* Faz com que as imagens cubram todo o espaço disponível sem distorcer */
+            object-position: center; /* Garante que a imagem seja centralizada */
+        }
+    </style>
 </head>
 
 <body>
@@ -48,11 +73,21 @@ if (!$user) {
         </div>
     </div>
 
-
-    <!-- Motivational Section -->
-    <div class="motivacional">
-        Frases motivacionais
+    <!-- Carrossel -->
+    <div class="carousel-container">
+        <div class="carousel">
+            <img src="../IMG/albert_camus_antes_a_questao_era_descobrir_se_a_vida_pr_lkeq5nk.webp" alt="Imagem 1">
+            <img src="../IMG/arnold_bennett_o_pessimismo_depois_de_voce_se_acostumar_lx0qgy2.webp" alt="Imagem 2">
+            <img src="../IMG/max_planck_para_os_crentes_deus_esta_no_principio_das_c_lxv95o2.webp" alt="Imagem 3">
+            <img src="../IMG/paulo_coelho_imagine_uma_nova_historia_para_sua_vida_e_lk7re9p.webp" alt="Imagem 4">
+            <img src="../IMG/platao_nao_espere_por_uma_crise_para_descobrir_o_que_e_lkzpmdp.webp" alt="Imagem 5">
+            <img src="../IMG/roberto_shinyashiki_tudo_o_que_um_sonho_precisa_para_se_lkm033x.webp" alt="Imagem 6">
+            <img src="../IMG/vergilio_ferreira_o_contrario_do_pessimismo_raramente_e_l2q7m8k.webp" alt="Imagem 7">
+            <img src="../IMG/william_james_pessimismo_leva_a_fraqueza_otimismo_ao_po_lx3zzy7.webp" alt="Imagem 8">
+        </div>
     </div>
+
+    <script src="../js/script.js"></script> <!-- Caminho corrigido -->
     
     <div class="metas-section">
         <h3>Metas ainda não cumpridas:</h3>

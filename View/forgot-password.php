@@ -12,9 +12,9 @@
     <div class="container">
         <!-- Painel Esquerdo -->
         <div class="left-panel">
-            <h1 style="margin-bottom: -90px">Recuperar</h1>
+            <h1 style="margin-bottom: -5px">Recuperar</h1>
             <br>
-            <h1 style="margin-bottom: -30px">Senha</h1>
+            <h1 style="margin-bottom: -20px">Senha</h1>
             <img src="../IMG/Design sem nome (2).png" alt="Projeto de Vida">
         </div>
 
