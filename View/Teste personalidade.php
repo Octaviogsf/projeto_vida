@@ -11,11 +11,13 @@ $db = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 $sql = 'SELECT * FROM personalities ORDER BY no ASC';
 $result = $db->query($sql);
 $data = array();
-while ($row = $result->fetch_object())
-  $data[] = $row;
+while ($row = $result->fetch_object()) {
+    $data[] = $row;
+}
 
+// Limitando para 3 perguntas
 $cols = 4;
-$rows = intval(count($data) / $cols); // Correção: 28 termos / 4 por questão = 7 questões
+$rows = 3; // Limitando para 3 perguntas
 ?>
 <!doctype html>
 <html>
@@ -44,7 +46,7 @@ $rows = intval(count($data) / $cols); // Correção: 28 termos / 4 por questão 
       <tbody>
         <?php
         $index = 0;
-        for ($i = 0; $i < $rows; ++$i) {
+        for ($i = 0; $i < $rows; ++$i) { // Limitando para 3 perguntas
           echo "<tr" . ($i % 2 == 0 ? " class='dark'" : "") . ">";
           echo "<td>" . ($i + 1) . "</td>";
           echo "<td colspan='3'>";
