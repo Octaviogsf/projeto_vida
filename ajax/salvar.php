@@ -1,9 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload de Foto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="card-azul">
 <?php
 require_once('../config/conn.php');
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['sucesso' => false, 'mensagem' => 'Usuário não logado']);
+    echo '<p>Usuário não logado</p>';
     exit();
 }
 
@@ -30,13 +41,20 @@ if (isset($_FILES['foto'])) {
         $stmt->bindParam(':user_id', $user_id);
 
         if ($stmt->execute()) {
-            echo json_encode(['sucesso' => true, 'mensagem' => 'Foto salva com sucesso!']);
+            echo '<p>Foto salva com sucesso!</p>';
         } else {
-            echo json_encode(['sucesso' => false, 'mensagem' => 'Erro ao salvar no banco de dados.']);
+            echo '<p>Erro ao salvar no banco de dados.</p>';
         }
     } else {
-        echo json_encode(['sucesso' => false, 'mensagem' => 'Formato de imagem inválido. Use JPEG, PNG ou GIF.']);
+        echo '<p>Formato de imagem inválido. Utilize JPEG, PNG ou GIF.</p>';
     }
 } else {
-    echo json_encode(['sucesso' => false, 'mensagem' => 'Nenhuma imagem enviada.']);
+    echo '<p>Nenhuma imagem enviada.</p>';
 }
+?>
+    <a href="../View/perfil.php" class="button-link">Editar perfil</a>
+    <a href="../View/index.php" class="button-link">Página Inicial</a>
+</div>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 <?php
-include 'inc/db.php';
+include '../inc/db.php';
 //-- consulta os dados do banco de dados
 $sql='SELECT * FROM tbl_personalities ORDER BY no ASC';
 $result=$db->query($sql);

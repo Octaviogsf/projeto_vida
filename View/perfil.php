@@ -83,6 +83,8 @@ if (!$user) {
             <textarea name="sobre_mim" placeholder="Escreva algo sobre você..."><?= htmlspecialchars($user['sobre_mim'] ?? '') ?></textarea>
 
             <button class="btn btn-primary btn-sm" style="margin-top:10px;" type="submit">Salvar Alterações</button>
+            <br>
+            <a href="index.php"><button class="btn btn-primary btn-sm" style="margin-top:10px;" type="button" >Voltar ao Início</button></a>
         </form>
     </div>
 </div>

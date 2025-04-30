@@ -31,27 +31,31 @@ if (!$user) {
     <script src="https://kit.fontawesome.com/d650d7db78.js" crossorigin="anonymous"></script>
 
     <style>
-        /* Carrossel */
         .carousel-container {
             position: relative;
-            width: 600px;               /* Tamanho fixo do carrossel */
-            height: 400px;              /* Defina a altura do carrossel */
-            overflow: hidden;           /* Esconde as imagens que estão fora da área visível */
+            width: 600px;
+            overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            margin: 0 auto;             /* Centraliza o carrossel na página */
+            margin: 0 auto;
+            margin-top: 100px;
         }
 
         .carousel {
             display: flex;
-            transition: transform 0.5s ease; /* Transição suave entre as imagens */
+            transition: transform 0.5s ease;
+            /* Transição suave entre as imagens */
         }
 
         .carousel img {
-            width: 100%;         /* Cada imagem ocupará 100% da largura do carrossel */
-            height: 100%;        /* Cada imagem ocupará 100% da altura do carrossel */
-            object-fit: cover;   /* Faz com que as imagens cubram todo o espaço disponível sem distorcer */
-            object-position: center; /* Garante que a imagem seja centralizada */
+            width: 100%;
+            /* Cada imagem ocupará 100% da largura do carrossel */
+            height: 100%;
+            /* Cada imagem ocupará 100% da altura do carrossel */
+            object-fit: cover;
+            /* Faz com que as imagens cubram todo o espaço disponível sem distorcer */
+            object-position: center;
+            /* Garante que a imagem seja centralizada */
         }
     </style>
 </head>
@@ -66,9 +70,13 @@ if (!$user) {
         <div style="display: flex; align-items: center; gap: 10px;">
             <!-- Imagem de perfil do usuário -->
             <div class="profile-icon">
-                <img src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil"
-                    style="width: 100%; height: 100%; border-radius: 50%;">
+                <a href="perfil.php">
+                    <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil"
+                        style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"
+                        onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
+                </a>
             </div>
+
             <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
     </div>
@@ -88,18 +96,27 @@ if (!$user) {
     </div>
 
     <script src="../js/script.js"></script> <!-- Caminho corrigido -->
-    
+
     <div class="metas-section">
-        <h3>Metas ainda não cumpridas:</h3>
+        <h3 style="font-weight: normal ;font-size: 50px">Metas ainda não cumpridas:</h3>
         <div class="metas-grid">
-            <div class="meta-card"></div>
-            <div class="meta-card"></div>
-            <div class="meta-card"></div>
-            <div class="meta-card"></div>
-            <div class="meta-card"></div>
-            <div class="meta-card"></div>
+            <a href="teste_personalidade.php">
+                <div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.png"
+                        alt=""></div>
+            </a>
+            <div class="metas-grid">
+                <a href="visualizar_resultados.php">
+                    <div><img height="200px" box-shadow: 60px -16px teal;
+                            src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).png" alt="">
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
+    <footer class="footer">
+        <p>&copy; <?= date('Y') ?>Projeto de Vida. Todos os direitos reservados. Feito por Octávio Gomes da Silva Ferreira</p>
+    </footer>
+
 </body>
 
 </html>

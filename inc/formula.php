@@ -1,13 +1,4 @@
 <?php
-/************************************
-FILENAME     : formula.php
-AUTHOR       : CAHYA DSN
-CREATED DATE : 2023-10-08
-UPDATED DATE : 2023-10-08
-DEMO SITE    : https://psycho.cahyadsn.com/disc_id
-SOURCE CODE  : https://github.com/cahyadsn/disc_id
-*************************************/
-
 function getDISCResults($db,$result,$line){
     $sql="
       SELECT
