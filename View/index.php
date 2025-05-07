@@ -104,17 +104,28 @@ if (!$user) {
                 <div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.png"
                         alt=""></div>
             </a>
-            <div class="metas-grid">
                 <a href="visualizar_resultados.php">
                     <div><img height="200px" box-shadow: 60px -16px teal;
                             src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).png" alt="">
                     </div>
+                    </a>
+                <a href="form.php">
+                    <div><img height="200px" box-shadow: 60px -16px teal;
+                            src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.jpg" alt="">
+                    </div>
                 </a>
             </div>
+                <br>
+                <div class="metas-grid">
+                <a href="form_result.php">
+                    <div><img height="200px" box-shadow: 60px -16px teal;
+                            src="..\IMG\Area and Perimeter Quiz Presentation in Colorful Retro Style (1).jpg" alt="">
+                    </div>
+                </a>
         </div>
     </div>
     <footer class="footer">
-        <p>&copy; <?= date('Y') ?>Projeto de Vida. Todos os direitos reservados. Feito por Octávio Gomes da Silva Ferreira</p>
+        <p>&copy; <?= date('Y') ?> Projeto de Vida. Todos os direitos reservados. Feito por Octávio Gomes da Silva Ferreira</p>
     </footer>
 
 </body>

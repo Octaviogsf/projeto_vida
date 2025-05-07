@@ -64,10 +64,10 @@ if ($mysqli->affected_rows) {
 
     <div class="right-panel">
         <div class="success-message">
-            <h1><?= htmlspecialchars($message) ?></h1>
+            <h1><?= htmlspecialchars($message) ?></h1><button type="submit" style="margin-top: 10px"><a href="../View/signup.html">Criar Conta</a></button></div>
         </div>
     </div>
-</div>
+
 
 </body>
 </html>
