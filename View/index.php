@@ -63,9 +63,11 @@ if (!$user) {
 <body>
     <!-- Header -->
     <div class="header">
-        <div class="logo">
-            <img src="../IMG/Logo sem fundoe.png" alt="Logo" style="width: 100%; height: 100%;">
-        </div>
+        <a href="index.php">
+            <div class="logo">
+                <img src="../IMG/Logo sem fundoe.png" alt="Logo" style="width: 100%; height: 100%;">
+            </div>
+        </a>
         <div class="user-name">Olá, <?= htmlspecialchars($user['name'] ?? 'Usuário') ?>!</div>
         <div style="display: flex; align-items: center; gap: 10px;">
             <!-- Imagem de perfil do usuário -->
@@ -98,34 +100,36 @@ if (!$user) {
     <script src="../js/script.js"></script> <!-- Caminho corrigido -->
 
     <div class="metas-section">
-        <h3 style="font-weight: normal ;font-size: 50px">Metas ainda não cumpridas:</h3>
+        <h3 style="font-weight: normal ;font-size: 50px">##########</h3>
         <div class="metas-grid">
             <a href="teste_personalidade.php">
                 <div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.png"
                         alt=""></div>
             </a>
-                <a href="visualizar_resultados.php">
-                    <div><img height="200px" box-shadow: 60px -16px teal;
-                            src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).png" alt="">
-                    </div>
-                    </a>
-                <a href="form.php">
-                    <div><img height="200px" box-shadow: 60px -16px teal;
-                            src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.jpg" alt="">
-                    </div>
-                </a>
-            </div>
-                <br>
-                <div class="metas-grid">
-                <a href="form_result.php">
-                    <div><img height="200px" box-shadow: 60px -16px teal;
-                            src="..\IMG\Area and Perimeter Quiz Presentation in Colorful Retro Style (1).jpg" alt="">
-                    </div>
-                </a>
+            <a href="visualizar_resultados.php">
+                <div><img height="200px" box-shadow: 60px -16px teal;
+                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).png" alt="">
+                </div>
+            </a>
+
+        </div>
+        <br>
+        <div class="metas-grid">
+            <a href="form.php">
+                <div><img height="200px" box-shadow: 60px -16px teal;
+                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.jpg" alt="">
+                </div>
+            </a>
+            <a href="form_result.php">
+                <div><img height="200px" box-shadow: 60px -16px teal;
+                        src="..\IMG\Area and Perimeter Quiz Presentation in Colorful Retro Style (1).jpg" alt="">
+                </div>
+            </a>
         </div>
     </div>
     <footer class="footer">
-        <p>&copy; <?= date('Y') ?> Projeto de Vida. Todos os direitos reservados. Feito por Octávio Gomes da Silva Ferreira</p>
+        <p>&copy; <?= date('Y') ?> Projeto de Vida. Todos os direitos reservados. Feito por Octávio Gomes da Silva
+            Ferreira</p>
     </footer>
 
 </body>

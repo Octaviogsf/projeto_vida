@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Recuperar Senha</title>
-    <link rel="stylesheet" href="../style.css"> <!-- Certifique-se de que esse arquivo contenha o CSS que você forneceu -->
+    <link rel="stylesheet" href="../style.css">
+    <!-- Certifique-se de que esse arquivo contenha o CSS que você forneceu -->
 </head>
 
 <body>
@@ -17,7 +18,11 @@
             <h1 style="margin-bottom: -20px">Senha</h1>
             <img src="../IMG/Design sem nome (2).png" alt="Projeto de Vida">
         </div>
-
+        <style>
+            form {
+                max-width: 400px;
+            }
+        </style>
         <!-- Painel Direito -->
         <div class="right-panel">
             <form method="post" action="../Controller/send-password-reset.php">

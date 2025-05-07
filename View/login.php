@@ -51,7 +51,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <?php if ($is_invalid): ?>
             <em>Email ou senha inválidos</em>
         <?php endif; ?>
-
+<style>
+    form{
+        max-width: 400px;
+    }
+</style>
         <form method="post">
             <label for="email">Email:</label>
             <input type="email" name="email" id="email"
@@ -64,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <button type="submit" style="margin-top: 10px"><a href="signup.html">Criar Conta</a></button>
         </form>
 
-        <a href="forgot-password.php" style="color: #000000">Esqueci minha senha</a>
+        <a href="forgot-password.php" style="color: #000000; font-size: 44px">Esqueci minha senha</a>
     </div>
 </div>
 

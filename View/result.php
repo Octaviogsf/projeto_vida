@@ -1,36 +1,97 @@
+<?php
+require_once('../config/conn.php');
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+  header('Location: login.php');
+  exit();
+}
+
+$user_id = $_SESSION['user_id'];
+
+$sql = "SELECT * FROM user WHERE id = :user_id";
+$stmt = $pdo->prepare($sql);
+$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$stmt->execute();
+$user = $stmt->fetch();
+
+if (!$user) {
+  echo "Usuário não encontrado.";
+  exit();
+}
+?>
 <!doctype html>
 <html>
 
 <head>
   <title>Teste de Personalidade</title>
-  <link rel='stylesheet' href='' />
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://kit.fontawesome.com/d650d7db78.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    header h1 {
+      text-align: center;
+      color: #162136;
+      margin-top: 5px;
+      font-size: 80px;
+      font-weight: normal;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .info-box {
+      background: #162136;
       padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      min-width: 320px;
+      max-width: 600px;
+      color: white;
+      font-size: 30px;
     }
 
-    #radarContainer {
-      width: 700px;
-      height: 500px;
-      margin: 0 auto;
+    .chart-box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      min-width: 320px;
+      max-width: 600px;
     }
 
-    canvas {
+    #radarChart {
       width: 100% !important;
       height: 100% !important;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin-top: 0;
+      font-weight: normal;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 5px;
+      font-weight: lighter;
+
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <h1>Resultado da Personalidade</h1>
-  </header>
-
   <?php
-  session_start();
   if (isset($_POST['m']) && isset($_POST['l'])) {
     include '../inc/db.php';
     include '../inc/formula.php';
@@ -41,8 +102,8 @@
     $aspecto = array('D', 'I', 'S', 'C');
 
     foreach ($aspecto as $a) {
-      $resultado[$a][1] = isset($mais[$a]) ? $mais[$a] : 0;
-      $resultado[$a][2] = isset($menos[$a]) ? $menos[$a] : 0;
+      $resultado[$a][1] = $mais[$a] ?? 0;
+      $resultado[$a][2] = $menos[$a] ?? 0;
       $resultado[$a][3] = $resultado[$a][1] - $resultado[$a][2];
     }
 
@@ -50,18 +111,18 @@
     $linha2 = getPattern($db, $resultado, 2);
     $linha3 = getPattern($db, $resultado, 3);
 
-    // Inserir os dados no banco de dados
+    // Salva no banco
     $stmt = $db->prepare("INSERT INTO resultados_quiz (
-    d_mais, i_mais, s_mais, c_mais,
-    d_menos, i_menos, s_menos, c_menos,
-    d_dif, i_dif, s_dif, c_dif,
-    comportamento_publico,
-    comportamento_pressao,
-    comportamento_oculto,
-    descricao,
-    profissoes,
-    user_id
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      d_mais, i_mais, s_mais, c_mais,
+      d_menos, i_menos, s_menos, c_menos,
+      d_dif, i_dif, s_dif, c_dif,
+      comportamento_publico,
+      comportamento_pressao,
+      comportamento_oculto,
+      descricao,
+      profissoes,
+      user_id
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     $stmt->execute([
       $linha1[0]->d,
@@ -83,20 +144,86 @@
       $linha3[1]->jobs ?? '',
       $_SESSION["user_id"]
     ]);
-
     ?>
+    <div class="header">
+      <a href="index.php">
+        <div class="logo">
+          <img src="../IMG/Logo sem fundoe.png" alt="Logo" style="width: 100%; height: 100%;">
+        </div>
+      </a>
+      <div class="user-name">Olá, <?= htmlspecialchars($user['name'] ?? 'Usuário') ?>!</div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <!-- Imagem de perfil do usuário -->
+        <div class="profile-icon">
+          <a href="perfil.php">
+            <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil"
+              style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"
+              onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
+          </a>
+        </div>
 
-    <div id="radarContainer">
-      <canvas id="radarChart"></canvas>
+        <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
+      </div>
+    </div>
+    <header>
+      <h1>Resultado da Personalidade</h1>
+    </header>
+
+    <div class="container">
+      <!-- Gráfico -->
+      <div class="chart-box">
+        <canvas id="radarChart"></canvas>
+      </div>
+
+      <!-- Informações -->
+      <div class="info-box">
+        <h3>Significado dos Aspectos:</h3>
+        <ul>
+          <li>D – Dominância: Foco em resultados, assertividade, controle.</li>
+          <li>I – Influência: Comunicação, entusiasmo, persuasão.</li>
+          <li>S – Estabilidade: Paciência, lealdade, previsibilidade.</li>
+          <li>C – Conformidade: Precisão, lógica, foco em regras.</li>
+        </ul>
+
+        <h2>RESULTADO</h2>
+
+        Personalidade em público:
+        <?php
+        if ($linha1[1]->behaviour ?? false) {
+          echo "<ul><li>" . implode('</li><li>', explode(',', $linha1[1]->behaviour)) . "</li></ul>";
+        }
+
+        echo "Personalidade sob pressão:";
+        if ($linha2[1]->behaviour ?? false) {
+          echo "<ul><li>" . implode('</li><li>', explode(',', $linha2[1]->behaviour)) . "</li></ul>";
+        }
+
+        echo "Personalidade verdadeira e oculta:";
+        if ($linha3[1]->behaviour ?? false) {
+          echo "<ul><li>" . implode('</li><li>', explode(',', $linha3[1]->behaviour)) . "</li></ul>";
+        }
+        ?>
+        <br>
+        <h3>Descrição da Personalidade:</h3>
+        <p><?= $linha3[1]->description ?? 'Descrição não disponível.' ?></p>
+
+        <h3>Profissões Compatíveis</h3>
+        <?php
+        if ($linha3[1]->jobs ?? false) {
+          echo "<ul><li>" . implode('</li><li>', explode(',', $linha3[1]->jobs)) . "</li></ul>";
+        } else {
+          echo "<p>Profissões não disponíveis.</p>";
+        }
+        ?>
+      </div>
     </div>
 
     <script>
       const ctx = document.getElementById('radarChart');
-
       new Chart(ctx, {
         type: 'radar',
         data: {
-          labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (E)', 'Conformidade (C)'],
+          labels: ['Dominância (D)', 'Influência (I)', 'Estabilidade (S)', 'Conformidade (C)'],
           datasets: [
             {
               label: 'MAIS (Eu Público)',
@@ -141,68 +268,9 @@
       });
     </script>
 
-    <div style="margin-top: 30px;">
-      <h3>Significado dos Aspectos DISC:</h3>
-      <ul>
-        <li><b>D – Dominância</b>: Foco em resultados, assertividade, controle.</li>
-        <li><b>I – Influência</b>: Comunicação, entusiasmo, persuasão.</li>
-        <li><b>E – Estabilidade</b>: Paciência, lealdade, previsibilidade.</li>
-        <li><b>C – Conformidade</b>: Precisão, lógica, foco em regras.</li>
-      </ul>
-    </div>
-
-    <div>
-      <h1>RESULTADO</h1>
-      <div>
-        <h2>Perfil de Caráter</h2>
-        <b>Personalidade em público</b><br />
-        <?php
-        if (isset($linha1[1]) && isset($linha1[1]->behaviour)) {
-          echo "<ul><li>" . implode('</li><li>', explode(',', $linha1[1]->behaviour)) . "</li></ul>";
-        } else {
-          echo "<p>Comportamento não disponível.</p>";
-        }
-        ?>
-
-        <b>Personalidade sob pressão</b><br />
-        <?php
-        if (isset($linha2[1]) && isset($linha2[1]->behaviour)) {
-          echo "<ul><li>" . implode('</li><li>', explode(',', $linha2[1]->behaviour)) . "</li></ul>";
-        } else {
-          echo "<p>Comportamento não disponível.</p>";
-        }
-        ?>
-
-        <b>Personalidade verdadeira e oculta</b><br />
-        <?php
-        if (isset($linha3[1]) && isset($linha3[1]->behaviour)) {
-          echo "<ul><li>" . implode('</li><li>', explode(',', $linha3[1]->behaviour)) . "</li></ul>";
-        } else {
-          echo "<p>Comportamento não disponível.</p>";
-        }
-        ?>
-
-        <h2>Descrição da Personalidade</h2>
-        <?php
-        if (isset($linha3[1]) && isset($linha3[1]->description)) {
-          echo "<p>{$linha3[1]->description}</p>";
-        } else {
-          echo "<p>Descrição não disponível.</p>";
-        }
-        ?>
-
-        <h2>Profissões Compatíveis</h2>
-        <?php
-        if (isset($linha3[1]) && isset($linha3[1]->jobs)) {
-          echo "<ul><li>" . implode('</li><li>', explode(',', $linha3[1]->jobs)) . "</li></ul>";
-        } else {
-          echo "<p>Profissões não disponíveis.</p>";
-        }
-        ?>
-      </div>
-    </div>
-
-  <?php } ?>
+  <?php } else {
+    echo "<p>Erro: dados não enviados.</p>";
+  } ?>
 </body>
 
 </html>
