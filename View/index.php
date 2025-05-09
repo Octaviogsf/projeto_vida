@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+// Busca os dados do usuário
 $sql = "SELECT * FROM user WHERE id = :user_id";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -18,6 +19,29 @@ $user = $stmt->fetch();
 if (!$user) {
     echo "Usuário não encontrado.";
     exit();
+}
+
+// Busca os dados do planejamento futuro
+$sql_planejamento = "SELECT 
+    objetivos_curto, ja_faz_curto, precisa_fazer_curto, data_curto,
+    objetivos_medio, ja_faz_medio, precisa_fazer_medio, data_medio,
+    objetivos_longo, ja_faz_longo, precisa_fazer_longo, data_longo
+FROM planejamento_futuro 
+WHERE user_id = :user_id 
+ORDER BY data_envio DESC 
+LIMIT 1";
+
+$stmt_planejamento = $pdo->prepare($sql_planejamento);
+$stmt_planejamento->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$stmt_planejamento->execute();
+$planejamento = $stmt_planejamento->fetch();
+
+function diasRestantes($dataFinal)
+{
+    $hoje = new DateTime();
+    $dataAlvo = new DateTime($dataFinal);
+    $diferenca = $hoje->diff($dataAlvo);
+    return ($hoje > $dataAlvo) ? "Expirado há {$diferenca->days} dias" : "Faltam {$diferenca->days} dias";
 }
 ?>
 
@@ -29,7 +53,6 @@ if (!$user) {
     <title>Bem-vindo</title>
     <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/d650d7db78.js" crossorigin="anonymous"></script>
-
     <style>
         .carousel-container {
             position: relative;
@@ -44,18 +67,70 @@ if (!$user) {
         .carousel {
             display: flex;
             transition: transform 0.5s ease;
-            /* Transição suave entre as imagens */
         }
 
         .carousel img {
             width: 100%;
-            /* Cada imagem ocupará 100% da largura do carrossel */
             height: 100%;
-            /* Cada imagem ocupará 100% da altura do carrossel */
             object-fit: cover;
-            /* Faz com que as imagens cubram todo o espaço disponível sem distorcer */
             object-position: center;
-            /* Garante que a imagem seja centralizada */
+        }
+
+        .objetivos-planejamento {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f7f7f7;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .objetivos-planejamento h2 {
+            margin-bottom: 20px;
+        }
+
+        .objetivos-planejamento ul {
+            list-style: none;
+            padding: 0;
+
+        }
+
+        .objetivos-planejamento li {
+            margin-bottom: 25px;
+            font-size: 35px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .metas-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .metas-section {
+            padding: 50px;
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        em {
+            text-align: left;
+        }
+
+        h2 {
+            font-weight: normal;
+            font-size: 68px;
+            text-align: center;
         }
     </style>
 </head>
@@ -70,7 +145,6 @@ if (!$user) {
         </a>
         <div class="user-name">Olá, <?= htmlspecialchars($user['name'] ?? 'Usuário') ?>!</div>
         <div style="display: flex; align-items: center; gap: 10px;">
-            <!-- Imagem de perfil do usuário -->
             <div class="profile-icon">
                 <a href="perfil.php">
                     <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil"
@@ -78,7 +152,6 @@ if (!$user) {
                         onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
                 </a>
             </div>
-
             <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
     </div>
@@ -97,41 +170,86 @@ if (!$user) {
         </div>
     </div>
 
-    <script src="../js/script.js"></script> <!-- Caminho corrigido -->
+    <script src="../js/script.js"></script>
+    <br>
+    <br>
+    <br>
+    <!-- Exibição dos Objetivos -->
+    <!-- Exibição dos Objetivos -->
+    <?php if ($planejamento): ?>
+        <div class="objetivos-planejamento">
+            <h2>Meus Objetivos:</h2>
+            <ul>
+                <li>
+                    Curto Prazo: <?= htmlspecialchars($planejamento['objetivos_curto']) ?><br>
+                    <em>Data Final:</em> <?= date('d/m/Y', strtotime($planejamento['data_curto'])) ?>
+                    (<?= diasRestantes($planejamento['data_curto']) ?>)<br>
+                    Já estou fazendo: <?= htmlspecialchars($planejamento['ja_faz_curto']) ?><br>
+                    Preciso fazer: <?= htmlspecialchars($planejamento['precisa_fazer_curto']) ?>
+                </li>
+                <li>
+                    Médio Prazo: <?= htmlspecialchars($planejamento['objetivos_medio']) ?><br>
+                    <em>Data Final:</em> <?= date('d/m/Y', strtotime($planejamento['data_medio'])) ?>
+                    (<?= diasRestantes($planejamento['data_medio']) ?>)<br>
+                    Já estou fazendo: <?= htmlspecialchars($planejamento['ja_faz_medio']) ?><br>
+                    Preciso fazer: <?= htmlspecialchars($planejamento['precisa_fazer_medio']) ?>
+                </li>
+                <li>
+                    Longo Prazo: <?= htmlspecialchars($planejamento['objetivos_longo']) ?><br>
+                    <em>Data Final:</em> <?= date('d/m/Y', strtotime($planejamento['data_longo'])) ?>
+                    (<?= diasRestantes($planejamento['data_longo']) ?>)<br>
+                    Já estou fazendo: <?= htmlspecialchars($planejamento['ja_faz_longo']) ?><br>
+                    Preciso fazer: <?= htmlspecialchars($planejamento['precisa_fazer_longo']) ?>
+                </li>
+            </ul>
+        </div>
+    <?php else: ?>
+        <div style="text-align: center; margin: 20px auto; color: #888;font-size: 30px;">
+            Nenhum planejamento futuro encontrado.
+        </div>
+    <?php endif; ?>
 
+
+    <!-- Funcionalidades -->
     <div class="metas-section">
-        <h3 style="font-weight: normal ;font-size: 50px">##########</h3>
+        <h3 style="font-weight: normal; font-size: 50px">Funcionalidades:</h3>
         <div class="metas-grid">
             <a href="teste_personalidade.php">
                 <div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.png"
                         alt=""></div>
             </a>
             <a href="visualizar_resultados.php">
-                <div><img height="200px" box-shadow: 60px -16px teal;
-                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).png" alt="">
-                </div>
+                <div><img height="200px"
+                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).png" alt=""></div>
             </a>
-
         </div>
         <br>
         <div class="metas-grid">
             <a href="form.php">
-                <div><img height="200px" box-shadow: 60px -16px teal;
-                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.jpg" alt="">
-                </div>
+                <div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.jpg"
+                        alt=""></div>
             </a>
             <a href="form_result.php">
-                <div><img height="200px" box-shadow: 60px -16px teal;
-                        src="..\IMG\Area and Perimeter Quiz Presentation in Colorful Retro Style (1).jpg" alt="">
-                </div>
+                <div><img height="200px"
+                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).jpg" alt=""></div>
+            </a>
+        </div>
+        <div class="metas-grid">
+            <a href="form_planejamento.php">
+                <div><img height="200px"
+                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (2).png" alt=""></div>
+            </a>
+            <a href="resultados_planejamento.php">
+                <div><img height="200px"
+                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (3).png" alt=""></div>
             </a>
         </div>
     </div>
+
     <footer class="footer">
         <p>&copy; <?= date('Y') ?> Projeto de Vida. Todos os direitos reservados. Feito por Octávio Gomes da Silva
             Ferreira</p>
     </footer>
-
 </body>
 
 </html>

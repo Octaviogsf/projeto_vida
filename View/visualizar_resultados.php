@@ -74,11 +74,9 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
       height: 100% !important;
     }
 
-    h1,
-    h2,
-    h3 {
+    h1, h2, h3 {
       margin-top: 0;
-      font-weight: normal;
+      font-weight: 100;
     }
 
     ul {
@@ -93,26 +91,26 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-  <?php if ($result): ?>
-    <div class="header">
-      <a href="index.php">
-        <div class="logo">
-          <img src="../IMG/Logo sem fundoe.png" alt="Logo" style="width: 100%; height: 100%;">
-        </div>
-      </a>
-      <div class="user-name">Olá, <?= htmlspecialchars($user['name'] ?? 'Usuário') ?>!</div>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <div class="profile-icon">
-          <a href="perfil.php">
-            <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil"
-              style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"
-              onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
-          </a>
-        </div>
-        <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
+  <div class="header">
+    <a href="index.php">
+      <div class="logo">
+        <img src="../IMG/Logo sem fundoe.png" alt="Logo" style="width: 100%; height: 100%;">
       </div>
+    </a>
+    <div class="user-name">Olá, <?= htmlspecialchars($user['name'] ?? 'Usuário') ?>!</div>
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div class="profile-icon">
+        <a href="perfil.php">
+          <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil"
+            style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"
+            onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
+        </a>
+      </div>
+      <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
     </div>
+  </div>
 
+  <?php if ($result): ?>
     <header>
       <h1>Resultado da Personalidade</h1>
     </header>
@@ -234,33 +232,16 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
       });
     </script>
   <?php else: ?>
-    <div class="header">
-      <a href="index.php">
-        <div class="logo">
-          <img src="../IMG/Logo sem fundoe.png" alt="Logo" style="width: 100%; height: 100%;">
-        </div>
-      </a>
-      <div class="user-name">Olá, <?= htmlspecialchars($user['name'] ?? 'Usuário') ?>!</div>
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <div class="profile-icon">
-          <a href="perfil.php">
-            <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil"
-              style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"
-              onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
-          </a>
-        </div>
-        <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
-      </div>
-    </div>
-
     <header>
       <h1>Sem Resultados</h1>
     </header>
-    <div class="info-box">
-      <h2>Você ainda não realizou o teste de personalidade.</h2>
-      <p>Para visualizar seus resultados, é necessário concluir o teste.</p>
-      <a href="teste_personalidade.php" style="color: white; font-weight: bold; text-decoration: underline;">Fazer o Teste
-        Agora</a>
+
+    <div style="display: flex; justify-content: center; align-items: center; min-height: 60vh;">
+      <div class="info-box">
+        <h2>Você ainda não realizou o teste de personalidade.</h2>
+        <p>Para visualizar seus resultados, é necessário concluir o teste.</p>
+        <a href="teste_personalidade.php" style="color: white; text-decoration: underline;">Fazer o Teste Agora</a>
+      </div>
     </div>
   <?php endif; ?>
 </body>

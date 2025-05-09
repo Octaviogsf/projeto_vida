@@ -172,7 +172,9 @@ $respostas = $stmt->fetch(PDO::FETCH_ASSOC);
             <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
     </div>
-
+    <br>
+    <br>
+    <br>
     <h2>Resultados da Autoavaliação</h2>
 
     <?php if ($respostas): ?>
@@ -265,7 +267,7 @@ $respostas = $stmt->fetch(PDO::FETCH_ASSOC);
     <?php else: ?>
         <div class="not-found">
             <p>Nenhuma resposta encontrada.</p>
-            <a href="form_result.php">Responder agora</a>
+            <a href="form.php">Responder agora</a>
         </div>
     <?php endif; ?>
 </body>
