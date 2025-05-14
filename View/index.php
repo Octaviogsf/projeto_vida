@@ -21,20 +21,19 @@ if (!$user) {
     exit();
 }
 
-// Busca os dados do planejamento futuro
+// Busca todos os planejamentos do usuário
 $sql_planejamento = "SELECT 
     objetivos_curto, ja_faz_curto, precisa_fazer_curto, data_curto,
     objetivos_medio, ja_faz_medio, precisa_fazer_medio, data_medio,
     objetivos_longo, ja_faz_longo, precisa_fazer_longo, data_longo
 FROM planejamento_futuro 
 WHERE user_id = :user_id 
-ORDER BY data_envio DESC 
-LIMIT 1";
+ORDER BY data_envio DESC";
 
 $stmt_planejamento = $pdo->prepare($sql_planejamento);
 $stmt_planejamento->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt_planejamento->execute();
-$planejamento = $stmt_planejamento->fetch();
+$planejamentos = $stmt_planejamento->fetchAll();
 
 function diasRestantes($dataFinal)
 {
@@ -47,7 +46,6 @@ function diasRestantes($dataFinal)
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <title>Bem-vindo</title>
@@ -92,7 +90,6 @@ function diasRestantes($dataFinal)
         .objetivos-planejamento ul {
             list-style: none;
             padding: 0;
-
         }
 
         .objetivos-planejamento li {
@@ -102,6 +99,9 @@ function diasRestantes($dataFinal)
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
         }
 
         .metas-grid {
@@ -148,8 +148,8 @@ function diasRestantes($dataFinal)
             <div class="profile-icon">
                 <a href="perfil.php">
                     <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil"
-                        style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"
-                        onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
+                         style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"
+                         onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
                 </a>
             </div>
             <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
@@ -171,85 +171,71 @@ function diasRestantes($dataFinal)
     </div>
 
     <script src="../js/script.js"></script>
-    <br>
-    <br>
-    <br>
+
     <!-- Exibição dos Objetivos -->
-    <!-- Exibição dos Objetivos -->
-    <?php if ($planejamento): ?>
+    <?php if ($planejamentos): ?>
         <div class="objetivos-planejamento">
             <h2>Meus Objetivos:</h2>
             <ul>
-                <li>
-                    Curto Prazo: <?= htmlspecialchars($planejamento['objetivos_curto']) ?><br>
-                    <em>Data Final:</em> <?= date('d/m/Y', strtotime($planejamento['data_curto'])) ?>
-                    (<?= diasRestantes($planejamento['data_curto']) ?>)<br>
-                    Já estou fazendo: <?= htmlspecialchars($planejamento['ja_faz_curto']) ?><br>
-                    Preciso fazer: <?= htmlspecialchars($planejamento['precisa_fazer_curto']) ?>
-                </li>
-                <li>
-                    Médio Prazo: <?= htmlspecialchars($planejamento['objetivos_medio']) ?><br>
-                    <em>Data Final:</em> <?= date('d/m/Y', strtotime($planejamento['data_medio'])) ?>
-                    (<?= diasRestantes($planejamento['data_medio']) ?>)<br>
-                    Já estou fazendo: <?= htmlspecialchars($planejamento['ja_faz_medio']) ?><br>
-                    Preciso fazer: <?= htmlspecialchars($planejamento['precisa_fazer_medio']) ?>
-                </li>
-                <li>
-                    Longo Prazo: <?= htmlspecialchars($planejamento['objetivos_longo']) ?><br>
-                    <em>Data Final:</em> <?= date('d/m/Y', strtotime($planejamento['data_longo'])) ?>
-                    (<?= diasRestantes($planejamento['data_longo']) ?>)<br>
-                    Já estou fazendo: <?= htmlspecialchars($planejamento['ja_faz_longo']) ?><br>
-                    Preciso fazer: <?= htmlspecialchars($planejamento['precisa_fazer_longo']) ?>
-                </li>
+                <?php foreach ($planejamentos as $planejamento): ?>
+                    <?php if (!empty($planejamento['objetivos_curto'])): ?>
+                        <li>
+                            Curto Prazo: <?= htmlspecialchars($planejamento['objetivos_curto']) ?><br>
+                            <em>Data Final:</em> <?= date('d/m/Y', strtotime($planejamento['data_curto'])) ?>
+                            (<?= diasRestantes($planejamento['data_curto']) ?>)<br>
+                            Já estou fazendo: <?= htmlspecialchars($planejamento['ja_faz_curto']) ?><br>
+                            Preciso fazer: <?= htmlspecialchars($planejamento['precisa_fazer_curto']) ?>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if (!empty($planejamento['objetivos_medio'])): ?>
+                        <li>
+                            Médio Prazo: <?= htmlspecialchars($planejamento['objetivos_medio']) ?><br>
+                            <em>Data Final:</em> <?= date('d/m/Y', strtotime($planejamento['data_medio'])) ?>
+                            (<?= diasRestantes($planejamento['data_medio']) ?>)<br>
+                            Já estou fazendo: <?= htmlspecialchars($planejamento['ja_faz_medio']) ?><br>
+                            Preciso fazer: <?= htmlspecialchars($planejamento['precisa_fazer_medio']) ?>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if (!empty($planejamento['objetivos_longo'])): ?>
+                        <li>
+                            Longo Prazo: <?= htmlspecialchars($planejamento['objetivos_longo']) ?><br>
+                            <em>Data Final:</em> <?= date('d/m/Y', strtotime($planejamento['data_longo'])) ?>
+                            (<?= diasRestantes($planejamento['data_longo']) ?>)<br>
+                            Já estou fazendo: <?= htmlspecialchars($planejamento['ja_faz_longo']) ?><br>
+                            Preciso fazer: <?= htmlspecialchars($planejamento['precisa_fazer_longo']) ?>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     <?php else: ?>
-        <div style="text-align: center; margin: 20px auto; color: #888;font-size: 30px;">
-            Nenhum planejamento futuro encontrado.
+        <div style="text-align: center; margin: 20px auto; color: #888; font-size: 30px;">
+            Nenhum objetivo preenchido no planejamento.
         </div>
     <?php endif; ?>
-
 
     <!-- Funcionalidades -->
     <div class="metas-section">
         <h3 style="font-weight: normal; font-size: 50px">Funcionalidades:</h3>
         <div class="metas-grid">
-            <a href="teste_personalidade.php">
-                <div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.png"
-                        alt=""></div>
-            </a>
-            <a href="visualizar_resultados.php">
-                <div><img height="200px"
-                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).png" alt=""></div>
-            </a>
+            <a href="teste_personalidade.php"><div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.png" alt=""></div></a>
+            <a href="visualizar_resultados.php"><div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).png" alt=""></div></a>
         </div>
         <br>
         <div class="metas-grid">
-            <a href="form.php">
-                <div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.jpg"
-                        alt=""></div>
-            </a>
-            <a href="form_result.php">
-                <div><img height="200px"
-                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).jpg" alt=""></div>
-            </a>
+            <a href="form.php"><div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style.jpg" alt=""></div></a>
+            <a href="form_result.php"><div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (1).jpg" alt=""></div></a>
         </div>
         <div class="metas-grid">
-            <a href="form_planejamento.php">
-                <div><img height="200px"
-                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (2).png" alt=""></div>
-            </a>
-            <a href="resultados_planejamento.php">
-                <div><img height="200px"
-                        src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (3).png" alt=""></div>
-            </a>
+            <a href="form_planejamento.php"><div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (2).png" alt=""></div></a>
+            <a href="resultados_planejamento.php"><div><img height="200px" src="../IMG/Area and Perimeter Quiz Presentation in Colorful Retro Style (3).png" alt=""></div></a>
         </div>
     </div>
 
     <footer class="footer">
-        <p>&copy; <?= date('Y') ?> Projeto de Vida. Todos os direitos reservados. Feito por Octávio Gomes da Silva
-            Ferreira</p>
+        <p>&copy; <?= date('Y') ?> Projeto de Vida. Todos os direitos reservados. Feito por <a href="eu.php">Octávio Gomes da Silva Ferreira</a></p>
     </footer>
 </body>
-
 </html>

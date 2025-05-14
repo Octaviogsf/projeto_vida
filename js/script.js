@@ -18,4 +18,4 @@ function moveCarousel() {
 updateCarousel();
 
 // Faz o carrossel se mover automaticamente a cada 3 segundos (3000 milissegundos)
-setInterval(moveCarousel, 3000);
+setInterval(moveCarousel, 6500);

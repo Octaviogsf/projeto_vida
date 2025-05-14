@@ -139,13 +139,13 @@ if (!$user) {
     <form method="post" action="../Controller/salvar_planejamento.php">
         <div class="coluna">
             <label>Minhas aspirações:</label>
-            <input type="text" name="aspiracoes" required>
+            <input type="text" name="aspiracoes">
 
             <label>Meu sonho de infância:</label>
-            <input type="text" name="sonho_infancia" required>
+            <input type="text" name="sonho_infancia">
             <div class="bloco-sonho">
                 <label>Escolha Profissional:</label>
-                <select name="escolha_profissional" required>
+                <select name="escolha_profissional">
                     <option value="">Selecione</option>
                     <option value="Medicina">Medicina</option>
                     <option value="Engenharia">Engenharia</option>
@@ -281,46 +281,46 @@ if (!$user) {
                     </option>
                 </select>
                 <label>Detalhes:</label>
-                <input type="text" name="detalhes_profissao" required>
+                <input type="text" name="detalhes_profissao">
                 <label>Áreas de atuação:</label>
-                <input type="text" name="areas_atuacao" required>
+                <input type="text" name="areas_atuacao">
                 <label>Salariação:</label>
-                <input type="text" name="salariacao" required>
+                <input type="text" name="salariacao">
                 <label>Daqui 10 anos, como você se imagina:</label>
-                <textarea name="como_se_imagina_10_anos" required></textarea>
+                <textarea name="como_se_imagina_10_anos"></textarea>
             </div>
             <br>
             <div class="bloco-sonho">
                 <h3 style="text-align: center;">Como irei melhorar meu:</h3>
                 <label>Relacionamento Familiar:</label>
-                <input type="text" name="melhorar_relacionamento_familiar" required>
+                <input type="text" name="melhorar_relacionamento_familiar">
                 <label>Data limite para estabelecer essas boas práticas:</label>
-                <input type="date" name="data_relacionamento_familiar" required>
+                <input type="date" name="data_relacionamento_familiar">
 
                 <label>Saúde:</label>
-                <input type="text" name="melhorar_saude" required>
+                <input type="text" name="melhorar_saude">
                 <label>Data limite para estabelecer essas boas práticas:</label>
-                <input type="date" name="data_saude" required>
+                <input type="date" name="data_saude">
 
                 <label>Comunidade:</label>
-                <input type="text" name="melhorar_comunidade" required>
+                <input type="text" name="melhorar_comunidade">
                 <label>Data limite para estabelecer essas boas práticas:</label>
-                <input type="date" name="data_comunidade" required>
+                <input type="date" name="data_comunidade">
 
                 <label>Futuro Profissional:</label>
-                <input type="text" name="melhorar_profissao" required>
+                <input type="text" name="melhorar_profissao">
                 <label>Data limite para estabelecer essas boas práticas:</label>
-                <input type="date" name="data_profissao" required>
+                <input type="date" name="data_profissao">
 
                 <label>Amigos:</label>
-                <input type="text" name="melhorar_amigos" required>
+                <input type="text" name="melhorar_amigos">
                 <label>Data limite para estabelecer essas boas práticas:</label>
-                <input type="date" name="data_amigos" required>
+                <input type="date" name="data_amigos">
 
                 <label>Tempo Livre:</label>
-                <input type="text" name="melhorar_tempo_livre" required>
+                <input type="text" name="melhorar_tempo_livre">
                 <label>Data limite para estabelecer essas boas práticas:</label>
-                <input type="date" name="data_tempo_livre" required>
+                <input type="date" name="data_tempo_livre">
             </div>
         </div>
 
@@ -328,13 +328,13 @@ if (!$user) {
             <label>Liste seus sonhos:</label>
             <div id="lista-sonhos">
                 <div class="bloco-sonho">
-                    <input type="text" name="lista_sonhos[]" placeholder="Digite um sonho" required>
+                    <input type="text" name="lista_sonhos[]" placeholder="Digite um sonho">
                     <label>O que já estou fazendo:</label>
-                    <textarea name="ja_faz_sonho[]" required></textarea>
+                    <textarea name="ja_faz_sonho[]"></textarea>
                     <label>O que ainda preciso fazer:</label>
-                    <textarea name="precisa_fazer_sonho[]" required></textarea>
+                    <textarea name="precisa_fazer_sonho[]"></textarea>
                     <label>Data limite para realizar este sonho:</label>
-                    <input type="date" name="data_sonho[]" required>
+                    <input type="date" name="data_sonho[]">
                 </div>
             </div>
             <button type="button" onclick="adicionarSonho()">+ Adicionar sonho</button>
@@ -342,13 +342,13 @@ if (!$user) {
             <label>Objetivos a curto prazo (Um ano):</label>
             <div id="objetivos-curto">
                 <div class="bloco-sonho">
-                    <input type="text" name="objetivos_curto[]" placeholder="Objetivo curto prazo" required>
+                    <input type="text" name="objetivos_curto[]" placeholder="Objetivo curto prazo">
                     <label>O que já estou fazendo:</label>
-                    <textarea name="ja_faz_curto[]" required></textarea>
+                    <textarea name="ja_faz_curto[]"></textarea>
                     <label>O que ainda preciso fazer:</label>
-                    <textarea name="precisa_fazer_curto[]" required></textarea>
+                    <textarea name="precisa_fazer_curto[]"></textarea>
                     <label>Data limite para realizar este objetivo:</label>
-                    <input type="date" name="data_curto[]" required>
+                    <input type="date" name="data_curto[]">
                 </div>
             </div>
             <button type="button" onclick="adicionarObjetivo('curto')">+ Adicionar objetivo curto</button>
@@ -356,13 +356,13 @@ if (!$user) {
             <label>Objetivos a médio prazo (Três anos):</label>
             <div id="objetivos-medio">
                 <div class="bloco-sonho">
-                    <input type="text" name="objetivos_medio[]" placeholder="Objetivo médio prazo" required>
+                    <input type="text" name="objetivos_medio[]" placeholder="Objetivo médio prazo">
                     <label>O que já estou fazendo:</label>
-                    <textarea name="ja_faz_medio[]" required></textarea>
+                    <textarea name="ja_faz_medio[]"></textarea>
                     <label>O que ainda preciso fazer:</label>
-                    <textarea name="precisa_fazer_medio[]" required></textarea>
+                    <textarea name="precisa_fazer_medio[]"></textarea>
                     <label>Data limite para realizar este objetivo:</label>
-                    <input type="date" name="data_medio[]" required>
+                    <input type="date" name="data_medio[]">
                 </div>
             </div>
             <button type="button" onclick="adicionarObjetivo('medio')">+ Adicionar objetivo médio</button>
@@ -370,13 +370,13 @@ if (!$user) {
             <label>Objetivos a longo prazo (Sete anos):</label>
             <div id="objetivos-longo">
                 <div class="bloco-sonho">
-                    <input type="text" name="objetivos_longo[]" placeholder="Objetivo longo prazo" required>
+                    <input type="text" name="objetivos_longo[]" placeholder="Objetivo longo prazo">
                     <label>O que já estou fazendo:</label>
-                    <textarea name="ja_faz_longo[]" required></textarea>
+                    <textarea name="ja_faz_longo[]"></textarea>
                     <label>O que ainda preciso fazer:</label>
-                    <textarea name="precisa_fazer_longo[]" required></textarea>
+                    <textarea name="precisa_fazer_longo[]"></textarea>
                     <label>Data limite para realizar este objetivo:</label>
-                    <input type="date" name="data_longo[]" required>
+                    <input type="date" name="data_longo[]">
                 </div>
             </div>
             <button type="button" onclick="adicionarObjetivo('longo')">+ Adicionar objetivo longo</button>
@@ -393,13 +393,13 @@ if (!$user) {
             const bloco = document.createElement('div');
             bloco.classList.add('bloco-sonho');
             bloco.innerHTML = `
-                <input type="text" name="lista_sonhos[]" placeholder="Digite um sonho" required>
+                <input type="text" name="lista_sonhos[]" placeholder="Digite um sonho">
                 <label>O que já estou fazendo:</label>
-                <textarea name="ja_faz_sonho[]" required></textarea>
+                <textarea name="ja_faz_sonho[]"></textarea>
                 <label>O que ainda preciso fazer:</label>
-                <textarea name="precisa_fazer_sonho[]" required></textarea>
+                <textarea name="precisa_fazer_sonho[]"></textarea>
                 <label>Data limite para realizar este sonho:</label>
-                <input type="date" name="data_sonho[]" required>
+                <input type="date" name="data_sonho[]">
             `;
             container.appendChild(bloco);
         }
@@ -409,13 +409,13 @@ if (!$user) {
             const bloco = document.createElement('div');
             bloco.classList.add('bloco-sonho');
             bloco.innerHTML = `
-                <input type="text" name="objetivos_${tipo}[]" placeholder="Objetivo ${tipo} prazo" required>
+                <input type="text" name="objetivos_${tipo}[]" placeholder="Objetivo ${tipo} prazo">
                 <label>O que já estou fazendo:</label>
-                <textarea name="ja_faz_${tipo}[]" required></textarea>
+                <textarea name="ja_faz_${tipo}[]"></textarea>
                 <label>O que ainda preciso fazer:</label>
-                <textarea name="precisa_fazer_${tipo}[]" required></textarea>
+                <textarea name="precisa_fazer_${tipo}[]"></textarea>
                 <label>Data limite para realizar este objetivo:</label>
-                <input type="date" name="data_${tipo}[]" required>
+                <input type="date" name="data_${tipo}[]">
             `;
             container.appendChild(bloco);
         }

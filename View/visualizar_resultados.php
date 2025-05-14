@@ -45,6 +45,15 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
       flex-wrap: wrap;
       gap: 30px;
       justify-content: center;
+      padding: 20px;
+    }
+
+    .info-box,
+    .chart-box {
+      flex: 1 1 100%;
+      max-width: 600px;
+      min-width: 280px;
+      box-sizing: border-box;
     }
 
     .info-box {
@@ -52,11 +61,8 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      flex: 1;
-      min-width: 320px;
-      max-width: 600px;
       color: white;
-      font-size: 30px;
+      font-size: 34px;
     }
 
     .chart-box {
@@ -64,17 +70,18 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      flex: 1;
-      min-width: 320px;
-      max-width: 600px;
+      position: relative;
+      aspect-ratio: 1 / 1;
     }
 
     #radarChart {
       width: 100% !important;
-      height: 100% !important;
+      height: auto !important;
     }
 
-    h1, h2, h3 {
+    h1,
+    h2,
+    h3 {
       margin-top: 0;
       font-weight: 100;
     }
@@ -87,7 +94,55 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
       margin-bottom: 5px;
       font-weight: lighter;
     }
+
+    /* Responsivo para celular com fonte MAIOR */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 3000px;
+      }
+
+      .info-box {
+        font-size: 28px;
+        padding: 20px;
+      }
+
+      .container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px;
+      }
+
+      .chart-box {
+        aspect-ratio: 1 / 1;
+      }
+
+      .user-name {
+        font-size: 20px;
+      }
+
+      .profile-icon img {
+        width: 90px !important;
+        height: 90px !important;
+      }
+
+      h2 {
+        font-size: 34px;
+      }
+
+      h3 {
+        font-size: 34px;
+      }
+
+      ul li {
+        font-size: 34px;
+      }
+
+      p {
+        font-size: 34px;
+      }
+    }
   </style>
+
 </head>
 
 <body>

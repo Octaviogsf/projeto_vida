@@ -91,7 +91,6 @@ body {
     background-color: #19243a;
     color: white;
     display: flex;
-    align-items: center;
     justify-content: space-between;
     padding: 15px 30px;
 }
@@ -106,6 +105,7 @@ body {
 
 .header .user-name {
     font-size: 64px;
+    margin-top: 50px;
 }
 
 .header .profile-icon {
@@ -260,6 +260,7 @@ em {
     margin-top: 10px;
     display: block;
     text-align: center;
+    font-size: 44px;
 }
 
 .success-message {
@@ -339,4 +340,152 @@ em {
     padding: 10px 0;
     font-size: 24px;
     width: 100%;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 1024px) {
+    .perfil-container {
+        flex-direction: column;
+        max-width: 90%;
+    }
+
+    .perfil-foto,
+    .perfil-formulario {
+        border-radius: 0;
+        width: 100%;
+        border-radius: 0 !important;
+    }
+
+    .header .user-name {
+        font-size: 48px;
+    }
+
+    .header .profile-icon {
+        font-size: 80px;
+    }
+
+    .metas-grid {
+        padding: 0 20px;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .left-panel h1 {
+        font-size: 120px;
+        line-height: 5rem;
+    }
+
+    label {
+        font-size: 32px;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"],
+    input[type="date"] {
+        font-size: 24px;
+    }
+
+    button,
+    .button-link {
+        font-size: 36px;
+    }
+
+    .success-message h1 {
+        font-size: 36px;
+    }
+
+    .success-message p {
+        font-size: 28px;
+    }
+
+    .card-azul {
+        font-size: 32px;
+    }
+
+    .motivacional {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+
+    .left-panel h1 {
+        font-size: 80px;
+        line-height: 4rem;
+    }
+
+    .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .header .logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .header .user-name {
+        font-size: 36px;
+    }
+
+    .header .profile-icon {
+        font-size: 64px;
+    }
+
+    .metas-section h3 {
+        font-size: 28px;
+    }
+
+    .motivacional {
+        font-size: 20px;
+        height: auto;
+    }
+
+    .footer {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .left-panel h1 {
+        font-size: 60px;
+    }
+
+    label {
+        font-size: 24px;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"],
+    input[type="date"],
+    textarea {
+        font-size: 18px;
+    }
+
+    button,
+    .button-link {
+        font-size: 28px;
+    }
+
+    .success-message h1,
+    .success-message p {
+        font-size: 24px;
+    }
+
+    .card-azul {
+        font-size: 24px;
+        padding: 20px;
+    }
 }

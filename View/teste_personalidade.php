@@ -73,6 +73,30 @@ if (!$user) {
       font-weight: normal;
     }
 
+    .header {
+      background-color: #152642;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      max-width: 200px;
+      height: auto;
+    }
+
+    .user-name {
+      font-size: 20px;
+      margin: 10px;
+    }
+
+    .profile-icon {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .info-box {
       background-color: #1c2f4a;
       padding: 15px;
@@ -80,6 +104,7 @@ if (!$user) {
       border-radius: 8px;
       font-weight: normal;
       font-size: 28px;
+      line-height: 1.4;
     }
 
     #container {
@@ -118,7 +143,7 @@ if (!$user) {
       color: white;
       border: none;
       padding: 10px 20px;
-      font-size: 46px;
+      font-size: 32px;
       border-radius: 6px;
       cursor: pointer;
     }
@@ -132,14 +157,62 @@ if (!$user) {
     }
 
     form {
-      font-size: 44px;
+      font-size: 32px;
       font-weight: normal;
     }
 
     thead tr th {
       font-weight: normal;
     }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 28px;
+      }
+
+      .info-box {
+        font-size: 18px;
+        padding: 10px;
+        margin: 10px;
+      }
+
+      .user-name {
+        font-size: 34px;
+      }
+
+      .btn {
+        font-size: 34px;
+        padding: 8px 16px;
+      }
+
+      form {
+        font-size: 34px;
+      }
+
+      table th,
+      table td {
+        font-size: 14px;
+        padding: 6px;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .profile-icon img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .logo {
+        max-width: 150px;
+      }
+    }
   </style>
+
 </head>
 
 <body>

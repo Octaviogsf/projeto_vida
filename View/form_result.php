@@ -128,7 +128,6 @@ $respostas = $stmt->fetch(PDO::FETCH_ASSOC);
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             background-color: #0d1829;
             padding: 10px 20px;
         }

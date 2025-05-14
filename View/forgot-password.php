@@ -33,7 +33,9 @@
                 <input type="email" name="confirm_email" id="confirm_email" required>
 
                 <button type="submit">Recuperar Senha</button>
+
             </form>
+            <a href="login.php" style="color: #000000; font-size: 44px">Voltar ao Login</a>
         </div>
     </div>
 
