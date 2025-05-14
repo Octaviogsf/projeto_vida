@@ -26,16 +26,27 @@ Permite criar um plano de vida através de formulários interativos, testes de p
 ## 🗂️ Estrutura do Projeto
 
 projeto_vida/
+
 ├── ajax/ # Funções em AJAX
+
 ├── config/ # Arquivo de conexão com o banco
+
 ├── Controller/ # Lógica dos formulários
+
 ├── funcs/ # Funções auxiliares
+
 ├── inc/ # Includes reutilizáveis (navbar, proteção)
+
 ├── js/ # Scripts JavaScript
+
 ├── IMG/ # Imagens do projeto
+
 ├── View/ # Arquivos de visualização (páginas)
+
 ├── login.php # Página de login
+
 ├── user.php # Painel principal do usuário
+
 └── projetovida.sql # Estrutura do banco de dados
 
 
