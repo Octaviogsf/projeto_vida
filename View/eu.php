@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Busca os dados do usuário
 $sql = "SELECT * FROM user WHERE id = :user_id";
 $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -21,7 +20,6 @@ if (!$user) {
     exit();
 }
 
-// Busca todos os planejamentos do usuário
 $sql_planejamento = "SELECT 
     objetivos_curto, ja_faz_curto, precisa_fazer_curto, data_curto,
     objetivos_medio, ja_faz_medio, precisa_fazer_medio, data_medio,
@@ -46,91 +44,123 @@ function diasRestantes($dataFinal)
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Bem-vindo</title>
     <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/d650d7db78.js" crossorigin="anonymous"></script>
     <style>
-        .carousel-container {
-            position: relative;
-            width: 600px;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            margin: 0 auto;
-            margin-top: 100px;
+        * {
+            box-sizing: border-box;
         }
 
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
         }
 
-        .carousel img {
+        .header, .footer {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .objetivos-planejamento {
-            max-width: 800px;
-            margin: 40px auto;
             padding: 20px;
-            background: #f7f7f7;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .objetivos-planejamento h2 {
-            margin-bottom: 20px;
-        }
-
-        .objetivos-planejamento ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .objetivos-planejamento li {
-            margin-bottom: 25px;
-            font-size: 35px;
-            padding: 10px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            white-space: pre-wrap;
-        }
-
-        .metas-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .metas-section {
-            padding: 50px;
-            text-align: center;
+            background-color: #0077cc; /* azul claro */
+            color: white;
         }
 
         .footer {
             text-align: center;
-            padding: 30px;
-            margin-top: 50px;
+            font-size: 14px;
+            margin-top: 40px;
         }
 
-        em {
-            text-align: left;
+        .footer a {
+            color: white;
+            text-decoration: underline;
         }
 
-        h2 {
-            font-weight: normal;
-            font-size: 68px;
-            text-align: center;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .main-content {
+            padding: 0 10px;
+        }
+
+        .container-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 50px auto;
+            width: 100%;
+        }
+
+        .bloco {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #f7f7f7;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+        }
+
+        .bloco img {
+            width: 100%;
+            max-width: 390px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .bloco p {
+            font-size: 20px;
+            line-height: 1.6;
+            text-align: justify;
+            margin: 0;
+            flex: 1;
+        }
+
+        /* Responsivo para tablets */
+        @media (max-width: 900px) {
+            .bloco {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .bloco p {
+                font-size: 18px;
+            }
+        }
+
+        /* Responsivo para celulares */
+        @media (max-width: 600px) {
+            .bloco img {
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .bloco p {
+                font-size: 16px;
+            }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-icon img {
+                width: 90px;
+                height: 90px;
+            }
+
+            .user-name {
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
@@ -140,7 +170,7 @@ function diasRestantes($dataFinal)
     <div class="header">
         <a href="index.php">
             <div class="logo">
-                <img src="../IMG/Logo sem fundoe.png" alt="Logo" style="width: 100%; height: 100%;">
+                <img src="../IMG/Logo sem fundoe.png" alt="Logo" style="width: 100px; height: auto;">
             </div>
         </a>
         <div class="user-name">Olá, <?= htmlspecialchars($user['name'] ?? 'Usuário') ?>!</div>
@@ -148,10 +178,49 @@ function diasRestantes($dataFinal)
             <div class="profile-icon">
                 <a href="perfil.php">
                     <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil"
-                         style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"
-                         onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
+                        style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;"
+                        onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
                 </a>
             </div>
-            <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket" style="color: white;"></i></a>
         </div>
     </div>
+
+    <!-- Conteúdo principal -->
+    <div class="main-content">
+        <div class="container-vertical">
+            <div class="bloco">
+                <img src="../IMG/casa-de-praia.jpg" alt="Casa na Praia">
+                <p>
+                    Um dos meus maiores sonhos é possuir uma casa aconchegante na praia, onde eu possa escapar da rotina
+                    agitada e encontrar paz na simplicidade do mar e do vento. Imagino passar dias ensolarados acordando com
+                    o som das ondas, caminhando pela areia fina e sentindo a brisa fresca tocar meu rosto. Essa casa seria
+                    um refúgio para a família e amigos, um lugar para criar memórias, celebrar momentos especiais e
+                    desacelerar, longe do barulho e da correria da cidade. Ter um cantinho assim traria uma sensação de
+                    liberdade e bem-estar, onde o tempo parece passar mais devagar, e cada pôr do sol vira uma pintura única
+                    na minha vida.
+                </p>
+            </div>
+
+            <div class="bloco">
+                <img src="../IMG/noticia-232-20240918162432.jpg" alt="Carro de arrancada">
+                <p>
+                    Além disso, tenho uma grande paixão por velocidade e adrenalina, por isso sonho em ter um carro de
+                    arrancada, que me permita viver a emoção das pistas e a sensação única de acelerar ao máximo. Esse carro
+                    não é só um veículo, mas uma extensão do meu estilo de vida, onde cada detalhe é pensado para a
+                    performance e o prazer da pilotagem. Imagino sentir o ronco do motor, o controle preciso nas curvas e a
+                    vibração do asfalto sob as rodas, tudo isso enquanto compartilho essa paixão com amigos e participo de
+                    competições emocionantes. Ter esse carro seria a realização de um desejo de liberdade e desafio, algo
+                    que me impulsiona a ir além e a sempre buscar o próximo limite.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; <?= date('Y') ?> Projeto de Vida. Todos os direitos reservados. Feito por <a href="eu.php">Octávio Gomes da Silva Ferreira</a></p>
+    </div>
+</body>
+
+</html>

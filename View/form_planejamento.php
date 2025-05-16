@@ -111,6 +111,70 @@ if (!$user) {
             font-size: 45px;
             font-weight: normal;
         }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            background-color: #0d1829;
+            padding: 10px 20px;
+        }
+
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 36px;
+                padding: 10px;
+            }
+
+            form {
+                flex-direction: column;
+                padding: 20px;
+                gap: 20px;
+            }
+
+            .coluna {
+                max-width: 100%;
+                min-width: unset;
+            }
+
+            label {
+                font-size: 22px;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            select,
+            textarea {
+                font-size: 20px;
+                padding: 8px;
+            }
+
+            input[type="submit"],
+            button[type="button"] {
+                font-size: 20px;
+                padding: 12px 20px;
+            }
+
+            h3 {
+                font-size: 24px;
+            }
+
+            .user-name {
+                font-size: 18px;
+                text-align: center;
+                padding: 10px;
+            }
+
+            .profile-icon img,
+            .profile-icon i {
+                width: 80px !important;
+                height: 80px !important;
+                font-size: 60px !important;
+            }
+
+            .logo {
+                max-width: 180px;
+            }
+        }
     </style>
 </head>
 
