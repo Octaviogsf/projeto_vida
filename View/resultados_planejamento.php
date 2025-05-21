@@ -91,7 +91,7 @@ if (!$planejamento) {
 
     <body>
         <div class="card-azul">
-            <p>Usuário não encontrado.</p>
+            <p>Nenhum planejamento futuro cadastrado.</p>
             <a href="index.php" class="button-link">Página Inicial</a>
         </div>
     </body>
@@ -107,7 +107,6 @@ if (!$planejamento) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/d650d7db78.js" crossorigin="anonymous"></script>
     <title>Planejamento de Futuro</title>

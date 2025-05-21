@@ -214,7 +214,6 @@ body {
 
 form {
     width: 100%;
-
     margin: auto;
 }
 
@@ -421,12 +420,6 @@ em {
     .left-panel h1 {
         font-size: 80px;
         line-height: 4rem;
-    }
-
-    .header {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
     }
 
     .header .logo {

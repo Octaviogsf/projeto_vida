@@ -21,7 +21,6 @@ if (!$user) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/d650d7db78.js" crossorigin="anonymous"></script>
     <title>Planejamento de Futuro</title>
@@ -117,63 +116,8 @@ if (!$user) {
             justify-content: space-between;
             background-color: #0d1829;
             padding: 10px 20px;
-        }
+            align-items: baseline;
 
-        @media (max-width: 768px) {
-            h2 {
-                font-size: 36px;
-                padding: 10px;
-            }
-
-            form {
-                flex-direction: column;
-                padding: 20px;
-                gap: 20px;
-            }
-
-            .coluna {
-                max-width: 100%;
-                min-width: unset;
-            }
-
-            label {
-                font-size: 22px;
-            }
-
-            input[type="text"],
-            input[type="date"],
-            select,
-            textarea {
-                font-size: 20px;
-                padding: 8px;
-            }
-
-            input[type="submit"],
-            button[type="button"] {
-                font-size: 20px;
-                padding: 12px 20px;
-            }
-
-            h3 {
-                font-size: 24px;
-            }
-
-            .user-name {
-                font-size: 18px;
-                text-align: center;
-                padding: 10px;
-            }
-
-            .profile-icon img,
-            .profile-icon i {
-                width: 80px !important;
-                height: 80px !important;
-                font-size: 60px !important;
-            }
-
-            .logo {
-                max-width: 180px;
-            }
         }
     </style>
 </head>
@@ -187,6 +131,7 @@ if (!$user) {
         </a>
         <div class="user-name">Olá, <?= htmlspecialchars($user['name'] ?? 'Usuário') ?>!</div>
         <div style="display: flex; align-items: center; gap: 10px;">
+            <!-- Imagem de perfil do usuário -->
             <div class="profile-icon">
                 <a href="perfil.php">
                     <img id="fotoPerfil" src="imagem.php?id=<?= $user_id ?>" alt="Foto de Perfil"
@@ -194,6 +139,7 @@ if (!$user) {
                         onerror="this.onerror=null; this.style.display='none'; this.insertAdjacentHTML('afterend', '<i style=\'font-size: 80px;\' class=\'fa-solid fa-circle-user\'></i>');">
                 </a>
             </div>
+
             <a class="logout" href="logout.php"><i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
     </div>

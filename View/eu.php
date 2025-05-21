@@ -60,28 +60,26 @@ function diasRestantes($dataFinal)
             font-family: Arial, sans-serif;
         }
 
-        .header, .footer {
+        .header,
+        .footer {
             width: 100%;
             padding: 20px;
-            background-color: #0077cc; /* azul claro */
-            color: white;
+            background-color: #17243a color: white;
         }
 
         .footer {
             text-align: center;
-            font-size: 14px;
+            font-size: 24px;
             margin-top: 40px;
         }
 
         .footer a {
             color: white;
-            text-decoration: underline;
         }
 
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             flex-wrap: wrap;
         }
 
@@ -118,8 +116,7 @@ function diasRestantes($dataFinal)
         }
 
         .bloco p {
-            font-size: 20px;
-            line-height: 1.6;
+            font-size: 30px;
             text-align: justify;
             margin: 0;
             flex: 1;
@@ -193,33 +190,42 @@ function diasRestantes($dataFinal)
                 <img src="../IMG/casa-de-praia.jpg" alt="Casa na Praia">
                 <p>
                     Um dos meus maiores sonhos é possuir uma casa aconchegante na praia, onde eu possa escapar da rotina
-                    agitada e encontrar paz na simplicidade do mar e do vento. Imagino passar dias ensolarados acordando com
-                    o som das ondas, caminhando pela areia fina e sentindo a brisa fresca tocar meu rosto. Essa casa seria
+                    agitada e encontrar paz na simplicidade do mar e do vento. Imagino passar dias ensolarados acordando
+                    com
+                    o som das ondas, caminhando pela areia fina e sentindo a brisa fresca tocar meu rosto. Essa casa
+                    seria
                     um refúgio para a família e amigos, um lugar para criar memórias, celebrar momentos especiais e
                     desacelerar, longe do barulho e da correria da cidade. Ter um cantinho assim traria uma sensação de
-                    liberdade e bem-estar, onde o tempo parece passar mais devagar, e cada pôr do sol vira uma pintura única
+                    liberdade e bem-estar, onde o tempo parece passar mais devagar, e cada pôr do sol vira uma pintura
+                    única
                     na minha vida.
                 </p>
             </div>
 
             <div class="bloco">
-                <img src="../IMG/noticia-232-20240918162432.jpg" alt="Carro de arrancada">
+
                 <p>
                     Além disso, tenho uma grande paixão por velocidade e adrenalina, por isso sonho em ter um carro de
-                    arrancada, que me permita viver a emoção das pistas e a sensação única de acelerar ao máximo. Esse carro
+                    arrancada, que me permita viver a emoção das pistas e a sensação única de acelerar ao máximo. Esse
+                    carro
                     não é só um veículo, mas uma extensão do meu estilo de vida, onde cada detalhe é pensado para a
-                    performance e o prazer da pilotagem. Imagino sentir o ronco do motor, o controle preciso nas curvas e a
-                    vibração do asfalto sob as rodas, tudo isso enquanto compartilho essa paixão com amigos e participo de
-                    competições emocionantes. Ter esse carro seria a realização de um desejo de liberdade e desafio, algo
+                    performance e o prazer da pilotagem. Imagino sentir o ronco do motor, o controle preciso nas curvas
+                    e a
+                    vibração do asfalto sob as rodas, tudo isso enquanto compartilho essa paixão com amigos e participo
+                    de
+                    competições emocionantes. Ter esse carro seria a realização de um desejo de liberdade e desafio,
+                    algo
                     que me impulsiona a ir além e a sempre buscar o próximo limite.
                 </p>
+                <img src="../IMG/noticia-232-20240918162432.jpg" alt="Carro de arrancada">
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <div class="footer">
-        <p>&copy; <?= date('Y') ?> Projeto de Vida. Todos os direitos reservados. Feito por <a href="eu.php">Octávio Gomes da Silva Ferreira</a></p>
+        <p>&copy; <?= date('Y') ?> Projeto de Vida. Todos os direitos reservados. Feito por <a href="eu.php">Octávio
+                Gomes da Silva Ferreira</a></p>
     </div>
 </body>
 
